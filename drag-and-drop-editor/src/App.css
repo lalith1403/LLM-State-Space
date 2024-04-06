@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  @apply text-gray-800 min-h-screen flex flex-col;
+  flex: 1 0 auto; /* This allows the App to expand while also accommodating the footer */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Prevents the App from exceeding the #root element's height */
+}
+
+.flex-grow-0 {
+  flex-grow: 0;
+}
+
+.editor-workspace {
+  @apply bg-white flex-1 border-2 border-dashed border-gray-200 relative;
+  min-height: 100vh; /* This will ensure that the workspace takes up the full viewport height */
+  position: relative;
+}
+
+.component-panel, .property-sidebar {
+  @apply bg-gray-50 p-4;
+  width: 250px; /* Adjust the width as needed */
+  min-height: 100vh; /* Full height */
+  z-index: 2000; /* Ensure it's higher than other elements */
+  position: relative; /* z-index works on positioned elements (position:absolute, position:relative, or position:fixed) */
+}
+
+.draggable-component {
+  z-index: 100;
+  text-align: center;
+  @apply bg-blue-500 text-white p-4 my-2 rounded cursor-pointer shadow; /* Increased padding from p-2 to p-4 */
+  font-size: 1.25rem; /* Increase font size */
+  &:hover {
+    @apply bg-blue-600;
+  }
+  &.dragging {
+    @apply opacity-50;
+  }
+}
+
+.footer {
+  @apply p-4 bg-gray-100;
+  flex-shrink: 0; /* Prevents the footer from shrinking */
+}
+
+@layer utilities {
+  .shadow-outline {
+    /* Define your custom shadow style here */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  }
+}
+
+.component {
+  @apply transition ease-in-out duration-300;
+  &:hover {
+    @apply shadow-outline;
+  }
+}
+
+.selected-component {
+  @apply ring-2 ring-blue-300;
+}
+
+/* right align date, left align file name */
+.header {
+  @apply bg-gray-100 p-4 flex justify-between; 
+}
+
+.header button {
+  /* Style for the tab buttons */
+}
+
+.header .active-tab {
+  /* Style for the active tab */
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.component-panel {
+  /* make background a bit darker! */
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 6px;
+  /* @apply bg-gray-50 p-6; */
+  width: 250px; /* Adjust the width as needed */
+  min-height: 100vh; /* Full height */
+  display: flex;
+  flex-direction: column;
+} 
+
+.search-bar {
+  margin: 10px 0;
+}
+
+.draggable-component .delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none; /* Hide by default */
+  padding: 2px 5px;
+}
+
+.draggable-component:hover .delete-btn {
+  display: block; /* Show on hover */
+}
